@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é um teste de emprego que abrange a extração de informações através da API do GitHub. Ao inserir o nome de usuário, a aplicação exibe os repositórios associados.
+Este projeto é um teste de emprego que abrange a extração de informações através da API do GitHub. Ao inserir o login de usuário, a aplicação exibe os repositórios associados.
 
 Caso queira consultar a documentação completa da API do GitHub, [clique aqui](https://docs.github.com/en/rest?apiVersion=2022-11-28).
 
