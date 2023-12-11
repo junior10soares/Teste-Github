@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é um teste de emprego que abrange a extração de informações através da API do GitHub. Ao inserir o nome de usuário, a aplicação exibe os repositórios associados. O objetivo é [descreva brevemente o objetivo do teste].
+Este projeto é um teste de emprego que abrange a extração de informações através da API do GitHub. Ao inserir o nome de usuário, a aplicação exibe os repositórios associados.
 
 Caso queira consultar a documentação completa da API do GitHub, [clique aqui](https://docs.github.com/en/rest?apiVersion=2022-11-28).
 
@@ -41,8 +41,6 @@ Sinta-se à vontade para contribuir! Siga estas etapas:
 3. Faça suas alterações e commit: `git commit -m 'Adiciona nova feature'`
 4. Envie para o branch: `git push origin feature/nova-feature`
 5. Abra um pull request
-
-Agradecemos a todos os contribuidores!
 
 ## Contato
 
