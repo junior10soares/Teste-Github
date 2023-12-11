@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const LinkContainer = styled.a`
-    height: 120px;
+    height: 130px;
     width: 500px;
     padding: 10px;
     cursor: pointer;

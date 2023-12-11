@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { AxiosError } from "axios";
+import { useState } from "react"
+import { AxiosError } from "axios"
 
-import { Button } from "../../components/Button";
-import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
-import { Loading } from "../../components/Loading";
-import { CardRepo } from "../../components/CardRepo";
+import { Button } from "../../components/Button"
+import { Header } from "../../components/Header"
+import { Input } from "../../components/Input"
+import { Loading } from "../../components/Loading"
+import { CardRepo } from "../../components/CardRepo"
 
-import { api } from "../../lib/axios";
+import { api } from "../../lib/axios"
 
-import { HomeContainer, InputsContainer, TextHome } from "./styles";
+import { HomeContainer, InputsContainer, TextHome } from "./styles"
 
 type UserProps = {
     name: string
@@ -24,7 +24,6 @@ type RepoProps = {
 }
 
 export function Home() {
-
     const [dataUser, setDataUser] = useState<UserProps | null>(null)
     const [dataRepo, setRepo] = useState<RepoProps[]>([])
     const [inputValue, setInputValue] = useState<string>('')
@@ -35,11 +34,10 @@ export function Home() {
     function handleInputChange(value: string) {
         setInputValue(value)
         setShowWarning(false)
-        setUserNotFound(false);
+        setUserNotFound(false)
     }
 
     async function fetchUserData() {
-
         setIsLoading(true)
         setShowWarning(false)
         setUserNotFound(false)
@@ -51,15 +49,14 @@ export function Home() {
             setShowWarning(true)
             return
         }
+
         try {
             const responseUser = await api.get(`/users/${inputValue}`)
             const dataUser = responseUser.data
             setDataUser(dataUser)
 
-            const responseRepo = await api.get(`/users/${inputValue}/repos`)
-            const dataRepo = responseRepo.data
-            setRepo(dataRepo)
-
+            const responseRepo = await fetchAllRepos(`/users/${inputValue}/repos?per_page=100`)
+            setRepo(responseRepo)
         } catch (error) {
             setDataUser(null)
             setRepo([])
@@ -72,9 +69,33 @@ export function Home() {
         }
     }
 
+    async function fetchAllRepos(url: string): Promise<RepoProps[]> {
+        let allRepos: RepoProps[] = []
+        let nextPage = url
+
+        while (nextPage) {
+            const responseRepo = await api.get(nextPage)
+            const dataRepo = responseRepo.data
+
+            allRepos = [...allRepos, ...dataRepo]
+
+            const linkHeader = responseRepo.headers.link
+            nextPage = extractNextPageUrl(linkHeader) ?? ''
+        }
+
+        return allRepos
+    }
+
+    function extractNextPageUrl(linkHeader: string | undefined): string | null {
+        if (!linkHeader)
+            return null
+
+        const match = linkHeader.match(/<([^>]+)>;\s*rel="next"/)
+        return match ? match[1] : null
+    }
+
     return (
         <HomeContainer>
-
             <Header />
             <TextHome>Home</TextHome>
 
@@ -84,12 +105,12 @@ export function Home() {
             </InputsContainer>
 
             {showWarning && (
-                <strong style={{ display: 'flex', color: "red", fontSize: '12px', margin: '10px 0 0 470px' }}>
+                <strong style={{ display: 'flex', color: 'red', fontSize: '12px', margin: '10px 0 0 470px' }}>
                     Preencha o campo.
                 </strong>
             )}
             {userNotFound && (
-                <strong style={{ display: 'flex', color: "red", fontSize: '12px', margin: '10px 0 0 470px' }}>
+                <strong style={{ display: 'flex', color: 'red', fontSize: '12px', margin: '10px 0 0 470px' }}>
                     Usuário não encontrado. Por favor, digite um usuário válido!
                 </strong>
             )}
