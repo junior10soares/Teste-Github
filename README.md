@@ -12,8 +12,8 @@ O site do teste está acessível para qualquer pessoa [aqui](https://teste-githu
 
 ## Instruções de Uso
 
-1. Clone este repositório: `git clone https://github.com/junior10soares/Github`
-2. Navegue até o diretório do projeto: `cd Github`
+1. Clone este repositório: `git clone https://github.com/junior10soares/Teste-Github`
+2. Navegue até o diretório do projeto: `cd Teste-Github`
 3. Instale as dependências: `npm install`
 4. Execute a aplicação: `npm run dev`
 5. Acesse a aplicação no navegador.
